@@ -2,7 +2,7 @@ pipeline {
     agent any
 
     tools {
-        // Install the Maven version configured as "M3" and add it to the path.
+        // Must match the Maven tool name configured in Jenkins (Manage Jenkins -> Global Tool Configuration)
         maven "M398"
     }
 
@@ -13,26 +13,24 @@ pipeline {
                 sh 'mvn -version'
             }
         }
+
         stage('Build') {
             steps {
-                // Get some code from a GitHub repository
                 git 'https://github.com/jglick/simple-maven-project-with-tests.git'
-
-                // Run Maven on a Unix agent.
                 sh "mvn -Dmaven.test.failure.ignore=true clean package"
-
-                // To run Maven on a Windows agent, use
-                // bat "mvn -Dmaven.test.failure.ignore=true clean package"
             }
         }
+
         stage('Unit Test') {
             steps {
-                for (int i  = 0; i < 60; i++) {
-                    echo "${i + 1}"
-                    sleep 1
+                script {
+                    for (int i = 0; i < 60; i++) {
+                        echo "${i + 1}"
+                        sleep 1
+                    }
                 }
                 sh 'mvn test'
             }
-        } 
+        }
     }
 }
