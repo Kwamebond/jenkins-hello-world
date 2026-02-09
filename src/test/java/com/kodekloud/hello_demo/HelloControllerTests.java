@@ -60,7 +60,7 @@ public class HelloControllerTests {
     public void welcome_startsWithExpectedGreeting() throws Exception {
       mvc.perform(MockMvcRequestBuilders.get("/hello").accept(MediaType.APPLICATION_JSON))
           .andExpect(status().isOk())
-          .andExpect(content().string(startsWith("Hola"))); 
+          .andExpect(content().string(startsWith("Hello"))); 
 
     }
 
@@ -71,4 +71,5 @@ public class HelloControllerTests {
           .andExpect(content().string(endsWith("community!")));
 
     }
+
   }
