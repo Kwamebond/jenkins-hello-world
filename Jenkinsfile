@@ -12,7 +12,7 @@ pipeline {
       steps {
         git 'https://github.com/jglick/simple-maven-project-with-tests.git'
         sh 'mvn -Dmaven.test.failure.ignore=true clean package'
-        archiveArtifacts 'target/hello-word-*.jar'
+        archiveArtifacts 'target/hello-demo-*.jar'
       }
     }
 
